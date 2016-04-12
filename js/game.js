@@ -45,17 +45,21 @@ var game = {
     // Run on game resources loaded.
     "loaded" : function () {
         // set the "Play/Ingame" Screen Object
+        me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         // register our player entity in the object pool
         me.pool.register("mainPlayer", game.PlayerEntity);
+        me.pool.register("CoinEntity", game.CoinEntity);
+        me.pool.register("EnemyEntity", game.EnemyEntity);
 
         // enable the keyboard
         me.input.bindKey(me.input.KEY.LEFT,  "left");
         me.input.bindKey(me.input.KEY.RIGHT, "right");
+        me.input.bindKey(me.input.KEY.DOWN, "down");
         me.input.bindKey(me.input.KEY.X,     "jump", true);
 
         // start the game
-        me.state.change(me.state.PLAY);
+        me.state.change(me.state.MENU);
     }
 };
